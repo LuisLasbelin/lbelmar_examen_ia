@@ -24,7 +24,6 @@
 
 (defrule recoger-caja
     (fabrica robot pos ?pos cajas $?cajas maxcajas ?maxcajas pedido $?inip ?tipopedido $?finp lineapedido $?lineapedido palets $?ini palet ?pospalet ?tipo stock ?stock $?fin)
-    (pedido $?inip ?tipopedido $?finp)
     ; comprobaciones de que el palet en el que está el robot está en los pedidos
     (test (= ?pos ?pospalet))
     (test (eq ?tipo ?tipopedido))
@@ -33,7 +32,7 @@
     (test (< (length$ $?cajas) ?maxcajas))
     =>
     ; se añade la caja al robot y se resta del stock del palet y del pedido
-    (assert (fabrica robot pos ?pos cajas $?cajas ?tipo maxcajas pedido $?pedido ?maxcajas lineapedido $?lineapedido palets $?ini palet ?pospalet ?tipo stock (- ?stock 1) $?fin))
+    (assert (fabrica robot pos ?pos cajas $?cajas ?tipo maxcajas pedido $?inip $?finp ?maxcajas lineapedido $?lineapedido palets $?ini palet ?pospalet ?tipo stock (- ?stock 1) $?fin))
 )
 
 
